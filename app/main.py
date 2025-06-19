@@ -1,71 +1,43 @@
 import streamlit as st
-from prediction_helper import predict  # Ensure this is correctly linked to your prediction_helper.py
+from prediction_helper import predict
 
-# Set the page configuration and title
-st.set_page_config(page_title="Lauki Finance: Credit Risk Modelling", page_icon="📊")
-st.title("Lauki Finance: Credit Risk Modelling")
+# Page setup
+st.set_page_config(page_title="Credit Risk Classifier", page_icon="📊", layout="wide")
 
-# Create rows of three columns each
-row1 = st.columns(3)
-row2 = st.columns(3)
-row3 = st.columns(4)
-row4 = st.columns(3)
+st.markdown(
+    "<h2 style='text-align: center; color: #4CAF50;'>Credit Risk Classifier</h2>",
+    unsafe_allow_html=True
+)
+st.markdown("### 📋 Enter customer & loan details below")
 
-# Assign inputs to the first row with default values
-with row1[0]:
-    age = st.number_input('Age', min_value=18, step=1, max_value=100, value=28)
-with row1[1]:
-    income = st.number_input('Income', min_value=0, value=1200000)
-with row1[2]:
-    loan_amount = st.number_input('Loan Amount', min_value=0, value=2560000)
+# Input Layout
+with st.container():
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        age = st.number_input('🎂 Age', 18, 100, value=28, help="Customer's age in years")
+        delinquency_ratio = st.number_input('⚠️  Delinquency Ratio (%)', 0, 100, value=30, help="Percentage of delinquent payments")
+        residence_type = st.selectbox('🏠 Residence Type', ['Owned', 'Rented', 'Mortgage'])
+    with col2:
+        income = st.number_input('💰 Annual Income (₹)', min_value=0, value=1200000, step=50000)
+        credit_utilization_ratio = st.number_input('📈 Credit Utilization Ratio (%)', 0, 100, value=30, help="Used credit as % of total available")
+        loan_purpose = st.selectbox('🎯 Loan Purpose', ['Education', 'Home', 'Auto', 'Personal'])
+    with col3:
+        loan_amount = st.number_input('🏦 Loan Amount (₹)', min_value=0, value=2560000, step=100000)
+        num_open_accounts = st.number_input('📄 Open Loan Accounts', 1, 4, value=2)
+        loan_type = st.selectbox('🔒 Loan Type', ['Unsecured', 'Secured'])
 
-# Calculate Loan to Income Ratio and display it
+# Calculated Features
 loan_to_income_ratio = loan_amount / income if income > 0 else 0
-with row2[0]:
-    st.text("Loan to Income Ratio:")
-    st.text(f"{loan_to_income_ratio:.2f}")  # Display as a text field
+credit_utilization_per_income = credit_utilization_ratio / loan_to_income_ratio if loan_to_income_ratio > 0 else 0
 
-# Assign inputs to the remaining controls
-with row2[1]:
-    loan_tenure_months = st.number_input('Loan Tenure (months)', min_value=0, step=1, value=36)
-with row2[2]:
-    avg_dpd_per_delinquency = st.number_input('Avg DPD', min_value=0, value=20)
+# Tenure and DPD in one row
+col4, col5 = st.columns(2)
+with col4:
+    loan_tenure_months = st.number_input('⏳ Loan Tenure (months)', 0, 480, value=36)
+with col5:
+    avg_dpd_per_delinquency = st.number_input('📉 Average DPD per Delinquency', 0, 365, value=20)
 
+# Display Calculated Ratios
+st.markdown("### 📐 Calculated Ratios")
+main.py                                                                                                                                     31,63          Top
 
-with row3[0]:
-    delinquency_ratio = st.number_input('Delinquency Ratio', min_value=0, max_value=100, step=1, value=30)
-with row3[1]:
-    credit_utilization_ratio = st.number_input('Credit Utilization Ratio', min_value=0, max_value=100, step=1, value=30)
-with row3[2]:
-    num_open_accounts = st.number_input('Open Loan Accounts', min_value=1, max_value=4, step=1, value=2)
-credit_utilization_per_income = credit_utilization_ratio/loan_to_income_ratio
-with row3[3]:
-    st.text("Credit Utilization per income:")
-    st.text(f"{credit_utilization_per_income:.2f}")  # Display as a text field
-
-
-with row4[0]:
-    residence_type = st.selectbox('Residence Type', ['Owned', 'Rented', 'Mortgage'])
-with row4[1]:
-    loan_purpose = st.selectbox('Loan Purpose', ['Education', 'Home', 'Auto', 'Personal'])
-with row4[2]:
-    loan_type = st.selectbox('Loan Type', ['Unsecured', 'Secured'])
-
-
-# Button to calculate risk
-if st.button('Calculate Risk'):
-    # Call the predict function from the helper module
-    # print((age, income, loan_amount, loan_tenure_months, avg_dpd_per_delinquency,
-    #                                             delinquency_ratio, credit_utilization_ratio, num_open_accounts,
-    #                                             residence_type, loan_purpose, loan_type))
-    probability, credit_score, rating = predict(age, income, loan_amount, loan_tenure_months, avg_dpd_per_delinquency,
-                                                delinquency_ratio, credit_utilization_ratio, num_open_accounts,
-                                                residence_type, loan_purpose, loan_type, credit_utilization_per_income )
-
-    # Display the results
-    st.write(f"Deafult Probability: {probability:.2%}")
-    st.write(f"Credit Score: {credit_score}")
-    st.write(f"Rating: {rating}")
-
-# Footer
-# st.markdown('_Project From Codebasics ML Course_')
