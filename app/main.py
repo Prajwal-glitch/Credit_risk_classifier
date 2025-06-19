@@ -39,5 +39,28 @@ with col5:
 
 # Display Calculated Ratios
 st.markdown("### 📐 Calculated Ratios")
-main.py                                                                                                                                     31,63          Top
+col6, col7 = st.columns(2)
+with col6:
+    st.metric("Loan-to-Income Ratio", f"{loan_to_income_ratio:.2f}")
+with col7:
+    st.metric("Credit Utilization per Income", f"{credit_utilization_per_income:.2f}")
+
+# --- Predict button ---
+st.markdown("---")
+if st.button("🚀 Calculate Risk", use_container_width=True):
+    probability, credit_score, rating = predict(
+        age, income, loan_amount, loan_tenure_months, avg_dpd_per_delinquency,
+        delinquency_ratio, credit_utilization_ratio, num_open_accounts,
+        residence_type, loan_purpose, loan_type, credit_utilization_per_income
+    )
+
+    st.success("✅ Prediction Complete")
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("Default Probability", f"{probability:.2%}")
+    with col2:
+        st.metric("Credit Score", credit_score)
+    with col3:
+        st.metric("Rating", rating)
+
 
