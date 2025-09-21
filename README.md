@@ -1,22 +1,47 @@
-# Credit_risk_classifier
+# 💳 Credit Risk Classification  
 
-An interactive Streamlit app that predicts credit risk categories (Poor, Average, Good, Excellent) based on borrower profiles, bureau data, and loan details using machine learning.
+A machine learning-powered tool that predicts the **credit risk category (Poor, Average, Good, Excellent)** of borrowers using customer demographics, loan details, and bureau data.  
+Built with **Scikit-learn**, **Optuna**, and **Streamlit**.  
 
-Live Demo - https://prajwal-glitch-credit-risk-classifier-appmain-1mzyat.streamlit.app/
+🔗 **Live Demo** – [Streamlit App](https://your-streamlit-link.com)  
+🔗 **GitHub Repo** – [Credit Risk Classification](https://github.com/your-username/credit-risk-classification)  
 
-![App Screenshot](./screenshot.png)
+---
+
+## 🚀 Features  
+
+- **🧹 Data Cleaning & Preprocessing** – Handled missing values, categorical encoding, outlier treatment, and feature scaling.  
+- **🧑‍🔬 Credit Risk Models** – Logistic Regression, Random Forest, XGBoost compared with AUC, KS, and Gini metrics.  
+- **⚙️ Hyperparameter Optimization** – Automated tuning with **Optuna** to maximize model performance.  
+- **📊 Model Evaluation Metrics** – ROC-AUC: **0.98**, KS Statistic: **45%**, Gini Coefficient: **0.97**.  
+- **🌐 Web App Deployment** – Interactive **Streamlit app** for borrower-level risk scoring.  
+- **📖 Explainability** – Feature importance, WOE/IV analysis, and score distributions documented in Jupyter notebooks.  
+
+---
+
+## 🖼️ Screenshot  
+
+![Screenshot Placeholder](assets/demo_app.png)  
+
+---
 
 
-## Tools & Technologies
 
-- Python, Streamlit  
-- pandas, numpy, seaborn, matplotlib  
-- scikit-learn, xgboost, statsmodels
-
-## Setup
-
-Clone the repository and change the directory to downloaded repository. Run the following commands - 
+## 🛠️ Installation  
 
 ```bash
-pip3 install -r requirements.txt
-streamlit run main.py
+# Clone this repository
+git clone https://github.com/your-username/credit-risk-classification.git
+cd credit-risk-classification
+
+# Create and activate a virtual environment (recommended)
+python -m venv venv
+source venv/bin/activate   # On macOS/Linux
+venv\Scripts\activate      # On Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+
+## 📂 Project Structure  
+
