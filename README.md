@@ -3,8 +3,8 @@
 A machine learning-powered tool that predicts the **credit risk category (Poor, Average, Good, Excellent)** of borrowers using customer demographics, loan details, and bureau data.  
 Built with **Scikit-learn**, **Optuna**, and **Streamlit**.  
 
-🔗 **Live Demo** – [Streamlit App](https://your-streamlit-link.com)  
-🔗 **GitHub Repo** – [Credit Risk Classification](https://github.com/your-username/credit-risk-classification)  
+🔗 **Live Demo** – [Streamlit App](https://prajwal-glitch-credit-risk-classifier-appmain-1mzyat.streamlit.app/)  
+
 
 ---
 
