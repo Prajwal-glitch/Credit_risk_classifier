@@ -21,7 +21,7 @@ Built with **Scikit-learn**, **Optuna**, and **Streamlit**.
 
 ## 🖼️ Screenshot  
 
-![Screenshot Placeholder](assets/demo_app.png)  
+![Screenshot Placeholder](screenshot.png)  
 
 ---
 
